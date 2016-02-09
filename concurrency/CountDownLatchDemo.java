@@ -6,16 +6,16 @@ public class CountDownLatchDemo {
 	final static int NTHREADS = 3;
 
 	public static void main(String[] args) {
-		final CountDownLatch startSignal = new CountDownLatch(1);
-		final CountDownLatch doneSignal = new CountDownLatch(NTHREADS);
+		final CountDownLatch startSignal = new CountDownLatch(1); // prevent worker threads
+		final CountDownLatch doneSignal = new CountDownLatch(NTHREADS); // cause main thread to wait
 		Runnable r = new Runnable() {
 
 			@Override
 			public void run() {
 				try {
 					report("entered run()");
-					startSignal.await(); // wait until told to ...
-					report("doing work"); // ... proceed
+					startSignal.await(); // wait until told to ... 
+					report("doing work"); // ... main thread proceed when reach 0
 					Thread.sleep((int) (Math.random() * 1000));
 					doneSignal.countDown(); // reduce count on which
 					// main thread is ...
@@ -35,7 +35,7 @@ public class CountDownLatchDemo {
 		try {
 			System.out.println("main thread doing something");
 			Thread.sleep(1000); // sleep for 1 second
-			startSignal.countDown(); // let all threads proceed
+			startSignal.countDown(); // let all worker threads proceed
 			System.out.println("main thread doing something else");
 			doneSignal.await(); // wait for all threads to finish
 			executor.shutdownNow();
