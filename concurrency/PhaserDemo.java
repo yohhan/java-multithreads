@@ -7,9 +7,11 @@ public class PhaserDemo {
 	public static void main(String[] args) {
 		List<Runnable> tasks = new ArrayList<>();
 		tasks.add(
-				() -> System.out.printf("%s running at %d%n", Thread.currentThread().getName(), System.currentTimeMillis()));
+				() -> System.out.printf("%s running at %d%n", Thread.currentThread()
+						.getName(), System.currentTimeMillis()));
 		tasks.add(
-				() -> System.out.printf("%s running at %d%n", Thread.currentThread().getName(), System.currentTimeMillis()));
+				() -> System.out.printf("%s running at %d%n", Thread.currentThread()
+						.getName(), System.currentTimeMillis()));
 		runTasks(tasks);
 	}
 
