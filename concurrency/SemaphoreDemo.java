@@ -6,6 +6,7 @@ public class SemaphoreDemo {
 	public static void main(String[] args) {
 		final Pool pool = new Pool();
 		Runnable r = new Runnable() {
+			
 			@Override
 			public void run() {
 				String name = Thread.currentThread().getName();
