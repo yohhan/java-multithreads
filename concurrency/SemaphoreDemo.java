@@ -25,7 +25,7 @@ public class SemaphoreDemo {
 		};
 		ExecutorService[] executors = new ExecutorService[Pool.MAX_AVAILABLE + 1];
 		for (int i = 0; i < executors.length; i++) {
-			executors[i] = Executors.newSingleThreadExecutor();
+			executors[i] = Executors.newSingleThreadExecutor(); // executor to exe thread
 			executors[i].execute(r);
 		}
 	}
@@ -44,7 +44,7 @@ final class Pool {
 	}
 
 	String getItem() throws InterruptedException {
-		available.acquire();
+		available.acquire(); // let resources return to the pool
 		return getNextAvailableItem();
 	}
 
